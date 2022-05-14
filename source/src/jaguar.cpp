@@ -1225,7 +1225,7 @@ if (effect_start)
 			//	DSPExecP2(RISCCyclesPerScanline);	// Pipelined DSP execution (3 stage)...
 			//else
 				//DSPExec(RISCCyclesPerScanline);		// Ordinary non-pipelined DSP
-			//benoa
+			//wiimpathy
 			DSPExec(RISCCyclesPerScanline / 2);
 			//DSPExecComp(RISCCyclesPerScanline);		// Comparison core
 		}

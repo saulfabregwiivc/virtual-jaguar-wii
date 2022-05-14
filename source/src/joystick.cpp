@@ -229,16 +229,36 @@ void joystick_exec(void)
 			joypad_0_buttons[BUTTON_B] = 0x01;
 		if (SDL_JoystickGetButton(joystick, 2) == SDL_PRESSED)
 			joypad_0_buttons[BUTTON_C] = 0x01;
-		//benoa
+		if (SDL_JoystickGetButton(joystick, 3) == SDL_PRESSED)
+			joypad_0_buttons[BUTTON_1] = 0x01;
+		if (SDL_JoystickGetButton(joystick, 4) == SDL_PRESSED)
+			joypad_0_buttons[BUTTON_2] = 0x01;
+		if (SDL_JoystickGetButton(joystick, 5) == SDL_PRESSED)
+			joypad_0_buttons[BUTTON_3] = 0x01;
+		//wiimpathy
 		if (SDL_JoystickGetButton(joystick, 6) == SDL_PRESSED)
 			keystate[SDLK_ESCAPE]=true;
+		if (SDL_JoystickGetButton(joystick, 7) == SDL_PRESSED)
+			joypad_0_buttons[BUTTON_4] = 0x01;
+		if (SDL_JoystickGetButton(joystick, 8) == SDL_PRESSED)
+			joypad_0_buttons[BUTTON_5] = 0x01;
 
 		if (SDL_JoystickGetButton(joystick, 9) == SDL_PRESSED)
 			joypad_0_buttons[BUTTON_A] = 0x01;
 		if (SDL_JoystickGetButton(joystick, 10) == SDL_PRESSED)
 			joypad_0_buttons[BUTTON_B] = 0x01;
+		if (SDL_JoystickGetButton(joystick, 11) == SDL_PRESSED)
+			joypad_0_buttons[BUTTON_1] = 0x01;
 		if (SDL_JoystickGetButton(joystick, 12) == SDL_PRESSED)
 			joypad_0_buttons[BUTTON_C] = 0x01;
+		if (SDL_JoystickGetButton(joystick, 13) == SDL_PRESSED)
+			joypad_0_buttons[BUTTON_2] = 0x01;
+		if (SDL_JoystickGetButton(joystick, 14) == SDL_PRESSED)
+			joypad_0_buttons[BUTTON_3] = 0x01;
+		if (SDL_JoystickGetButton(joystick, 15) == SDL_PRESSED)
+			joypad_0_buttons[BUTTON_4] = 0x01;
+		if (SDL_JoystickGetButton(joystick, 16) == SDL_PRESSED)
+			joypad_0_buttons[BUTTON_5] = 0x01;
 		if (SDL_JoystickGetButton(joystick, 19) == SDL_PRESSED)
 			keystate[SDLK_ESCAPE]=true;
 

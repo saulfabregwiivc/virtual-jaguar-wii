@@ -53,4 +53,18 @@ void SaveVJSettings(void);
 
 extern VJSettings vjs;
 
+// Plugin : Device (sd or usb), full path. 
+//extern char *PluginDevice;
+//extern char *PluginGamePath;
+
+extern char *PluginDevice;
+extern char *PluginGamePath;
+
+extern char cfgfile[256];
+extern char biosfile[256];
+extern char biosCDfile[256];
+extern char statefile[256];
+extern char romspath[256];
+
+
 #endif	// __SETTINGS_H__

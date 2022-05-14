@@ -21,6 +21,7 @@
 #include <ogcsys.h>
 #include "fat.h"
 #include <sys/stat.h>
+
 // Uncomment this for speed control (?)
 //#define SPEED_CONTROL
 
@@ -44,6 +45,15 @@ char messageBuffer[200];
 bool BIOSLoaded = false;
 bool CDBIOSLoaded = false;
 
+char *PluginDevice;
+char *PluginGamePath;
+
+char cfgfile[256];
+char biosfile[256];
+char biosCDfile[256];
+char statefile[256];
+char romspath[256];
+
 
 //
 // The main emulator loop (what else?)
@@ -57,6 +67,28 @@ uint32 totalFrames;//temp, so we can grab this from elsewhere...
 extern "C" int SDL_main(int argc, char * argv[]) 
 {
 	fatInitDefault();
+	// Plugin
+	PluginDevice = argv[1];
+	PluginGamePath = argv[2];
+	char logdir[256]="";
+
+	strcpy(cfgfile,PluginDevice);
+	strcat(cfgfile,"/apps/jaguar/vj.cfg");
+
+	strcpy(biosfile,PluginDevice);
+	strcat(biosfile,"/apps/jaguar/BIOS/jagboot.rom");
+
+	strcpy(biosCDfile,PluginDevice);
+	strcat(biosCDfile,"/apps/jaguar/BIOS/jagcd.rom");
+
+	strcpy(statefile,PluginDevice);
+	strcat(statefile,"/apps/jaguar/EEPROMs");
+
+	strcpy(romspath,PluginDevice);
+	strcat(romspath,"/apps/jaguar/ROMs");
+		
+	strcpy(logdir,PluginDevice);
+	strcat(logdir,"/apps/jaguar/vj.log");
 
 //	uint32 startTime;//, totalFrames;//, endTime;//, w, h;
 //	uint32 nNormalLast = 0;
@@ -64,16 +96,16 @@ extern "C" int SDL_main(int argc, char * argv[])
 	//int32 nFrameskip = 0;							// Default: Show every frame
 //	int32 nFrame = 0;								// No. of Frame
 
-	printf("Virtual Jaguar GCC/SDL Portable Jaguar Emulator v1.0.7\n");
+	/*printf("Virtual Jaguar GCC/SDL Portable Jaguar Emulator v1.0.7\n");
 	printf("Based upon Virtual Jaguar core v1.0.0 by David Raingeard.\n");
 	printf("Written by Niels Wagenaar (Linux/WIN32), Carwin Jones (BeOS),\n");
 	printf("James L. Hammons (WIN32) and Adam Green (MacOS)\n");
 	printf("Contact: http://sdlemu.ngemu.com/ | sdlemu@ngemu.com\n");
-	SDL_Delay(2000);
+	SDL_Delay(2000);*/
 
 	bool haveCart = false;							// Assume there is no cartridge...!
 
-	log_init("/apps/jaguar/vj.log");
+	log_init(logdir);
 
 	LoadVJSettings();								// Get config file settings...
 
@@ -90,7 +122,7 @@ vjs.fullscreen = true;
 vjs.useJaguarBIOS=true;
 vjs.DSPEnabled=false;
 vjs.hardwareTypeNTSC = true;*/
-//haveCart=true;
+haveCart=true;
 //nFrameskip = 2;
 
 	// Set up SDL library
@@ -130,13 +162,15 @@ WriteLog("Initializing GUI subsystem...\n");
 
 	// Get the cartridge ROM (if passed in)
 	// Now with crunchy GUI goodness!
-//	JaguarLoadCart(jaguar_mainRom, (haveCart ? argv[1] : vjs.ROMPath));
+	//JaguarLoadCart(jaguar_mainRom, (haveCart ? argv[1] : vjs.ROMPath));
 //Need to find a better way to handle this crap...
 WriteLog("About to start GUI...\n");
 //	GUIMain();
-	GUIMain(haveCart ? argv[1] : NULL);
+	//GUIMain(haveCart ? argv[1] : NULL);
 	// TEST
 	//GUIMain("/apps/jaguar/ROMs/attack.j64");
+//GUIMain("/apps/jaguar/ROMs/bubsy.jag");
+GUIMain(PluginGamePath);
 
 //This is no longer accurate...!
 //	int elapsedTime = clock() - startTime;

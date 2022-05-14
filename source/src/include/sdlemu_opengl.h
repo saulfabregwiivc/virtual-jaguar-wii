@@ -22,6 +22,8 @@
 
 #include "SDL/SDL.h"
 #include "SDL/SDL_opengl.h"
+#include <GL/gl.h>	/* Header File For The OpenGL Library */
+#include <GL/glu.h>	/* Header File For The GLU Library */
 //#include "sdlemu_system.h"
 
 #ifdef __cplusplus

@@ -62,14 +62,15 @@ bool InitVideo(void)
 		//mainSurface = SDL_SetVideoMode(VIRTUAL_SCREEN_WIDTH,
 		//	(vjs.hardwareTypeNTSC ? VIRTUAL_SCREEN_HEIGHT_NTSC : VIRTUAL_SCREEN_HEIGHT_PAL),
 		//	16, mainSurfaceFlags);
-		mainSurface = SDL_SetVideoMode(320, 225, 16,SDL_FULLSCREEN);
+		//mainSurface = SDL_SetVideoMode(320, 225, 16,SDL_FULLSCREEN);
+		mainSurface = SDL_SetVideoMode(320, 225, 16,SDL_HWSURFACE|SDL_FULLSCREEN|SDL_DOUBLEBUF);
 	else
 	    // When OpenGL is used, we're going to use a standard resolution of 640x480.
 	    // This way we have good scaling functionality and when the screen is resized
 	    // because of the NTSC <-> PAL resize, we only have to re-create the texture
 	    // instead of initializing the entire OpenGL texture en screens.
 		//mainSurface = SDL_SetVideoMode(640, 480, 16, mainSurfaceFlags);
-		mainSurface = SDL_SetVideoMode(640,480,16,SDL_FULLSCREEN);
+		mainSurface = SDL_SetVideoMode(640,480,16,SDL_HWSURFACE|SDL_FULLSCREEN|SDL_DOUBLEBUF);
 
 	if (mainSurface == NULL)
 	{
@@ -206,7 +207,7 @@ void ResizeScreen(uint32 width, uint32 height)
 	}
 	else
 	{
-		mainSurface = SDL_SetVideoMode(width, height, 16, mainSurfaceFlags);
+		mainSurface = SDL_SetVideoMode(width, height, 16, SDL_HWSURFACE|SDL_FULLSCREEN|SDL_DOUBLEBUF);
 
 		if (mainSurface == NULL)
 		{
@@ -242,7 +243,7 @@ void ToggleFullscreen(void)
 	if (vjs.fullscreen)
 		mainSurfaceFlags |= SDL_FULLSCREEN;
 
-	mainSurface = SDL_SetVideoMode(tom_width, tom_height, 16, mainSurfaceFlags);
+	mainSurface = SDL_SetVideoMode(tom_width, tom_height, 16, SDL_HWSURFACE|SDL_FULLSCREEN|SDL_DOUBLEBUF);
 
 	if (mainSurface == NULL)
 	{

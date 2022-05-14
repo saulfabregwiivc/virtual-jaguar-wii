@@ -17,6 +17,24 @@ using namespace std;
 
 VJSettings vjs;
 
+/*char biosfile[256]="";
+char biosCDfile[256]="";
+char statefile[256]="";
+char romspath[256]="";*/
+
+
+	/*strcpy(biosfile,PluginDevice);
+	strcat(biosfile,"/apps/jaguar/BIOS/jagboot.rom");
+
+	strcpy(biosCDfile,PluginDevice);
+	strcat(biosCDfile,"/apps/jaguar/BIOS/jagcd.rom");
+
+	strcpy(statefile,PluginDevice);
+	strcat(statefile,"/apps/jaguar/EEPROMs");
+
+	strcpy(romspath,PluginDevice);
+	strcat(romspath,"/apps/jaguar/ROMs");*/
+
 // Private function prototypes
 
 void CheckForTrailingSlash(char * path);
@@ -26,7 +44,7 @@ void CheckForTrailingSlash(char * path);
 //
 void LoadVJSettings(void)
 {
-	if (sdlemu_init_config("/apps/jaguar/vj.cfg") == 0)			// CWD
+	if (sdlemu_init_config(cfgfile) == 0)			// CWD
 		/*&& sdlemu_init_config("~/vj.cfg") == 0		// Home
 		&& sdlemu_init_config("~/.vj/vj.cfg") == 0	// Home under .vj directory
 		&& sdlemu_init_config("vj.cfg") == 0)		// Somewhere in the path*/
@@ -88,10 +106,11 @@ void LoadVJSettings(void)
 	vjs.p2KeyBindings[19] = sdlemu_getval_int("p2k_pound", SDLK_KP_DIVIDE);
 	vjs.p2KeyBindings[20] = sdlemu_getval_int("p2k_star", SDLK_KP_MULTIPLY);
 
-	strcpy(vjs.jagBootPath, sdlemu_getval_string("JagBootROM", "/apps/jaguar/BIOS/jagboot.rom"));
-	strcpy(vjs.CDBootPath, sdlemu_getval_string("CDBootROM", "/apps/jaguar/BIOS/jagcd.rom"));
-	strcpy(vjs.EEPROMPath, sdlemu_getval_string("EEPROMs", "/apps/jaguar/EEPROMs"));
-	strcpy(vjs.ROMPath, sdlemu_getval_string("ROMs", "/apps/jaguar/ROMs"));
+
+	strcpy(vjs.jagBootPath, sdlemu_getval_string("JagBootROM", biosfile));
+	strcpy(vjs.CDBootPath, sdlemu_getval_string("CDBootROM", biosCDfile));
+	strcpy(vjs.EEPROMPath, sdlemu_getval_string("EEPROMs", statefile));
+	strcpy(vjs.ROMPath, sdlemu_getval_string("ROMs", romspath));
 	CheckForTrailingSlash(vjs.EEPROMPath);
 	CheckForTrailingSlash(vjs.ROMPath);
 

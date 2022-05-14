@@ -1480,25 +1480,24 @@ WriteLog("GUI: Clearing BG save...\n");
 	{
 		if (JaguarLoadFile(filename))
 		{
-			event.type = SDL_USEREVENT, event.user.code = MENU_ITEM_CHOSEN;
-			event.user.data1 = (void *)ResetJaguar;
-	    	SDL_PushEvent(&event);
-//jaguar_reset();
-
-//	return RunEmu();
+			//event.type = SDL_USEREVENT, event.user.code = MENU_ITEM_CHOSEN;
+			//event.user.data1 = (void *)ResetJaguar;
+	    	//SDL_PushEvent(&event);
+			jaguar_reset();
+			return RunEmu();
 		}
 		else
 		{
-//jaguar_reset();
-
-	//return RunEmu();
+			//wiimpathy
+			jaguar_reset();
+			return RunEmu();
 			// Create error dialog...
-			char errText[1024];
+			/*char errText[1024];
 			sprintf(errText, "The file %40s could no be loaded.", filename);
 
 			mainWindow = new Window(8, 16, 304, 160);
 			mainWindow->AddElement(new Text(8, 8, "Error!"));
-			mainWindow->AddElement(new Text(8, 24, errText));
+			mainWindow->AddElement(new Text(8, 24, errText));*/
 		}
 	}
 

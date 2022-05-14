@@ -38,7 +38,11 @@
     - Added automatic and override texture bpp depth setting (based upon the src surface);
 
 */
-
+#include <gccore.h>
+#include <SDL/SDL.h>
+#include "GL/gl.h"
+#include "GL/glu.h"
+#include "GL/glut.h"
 #include "sdlemu_opengl.h"
 
 static SDL_Surface *texture      = 0;
@@ -153,7 +157,7 @@ void sdlemu_draw_texture(SDL_Surface * dst, SDL_Surface * src, int texturetype)
 				glTexCoord2f(texcoord[0], texcoord[3]); glVertex3i(0, dst->h, 0);
 				glTexCoord2f(texcoord[2], texcoord[3]); glVertex3i(dst->w, dst->h, 0);*/
 
-//benoa : ahem... this is just to be able to compile, we don't use GL anyway.
+//wiimpathy : ahem... this is just to be able to compile, we don't use GL anyway.
 				glTexCoord2f(texcoord[0], texcoord[1]); glVertex3f(0, 0, 0);
 				glTexCoord2f(texcoord[2], texcoord[1]); glVertex3f(dst->w, 0, 0);
 				glTexCoord2f(texcoord[0], texcoord[3]); glVertex3f(0, dst->h, 0);
@@ -241,6 +245,7 @@ void sdlemu_create_texture(SDL_Surface * src, SDL_Surface * dst, int filter, int
         break;
     case 24: // *src has depth of 24 bpp
     #if SDL_BYTEORDER == SDL_BIG_ENDIAN
+
 	    rmask = 0x00ff0000;
 		gmask = 0x0000ff00;
 		bmask = 0x000000ff;
